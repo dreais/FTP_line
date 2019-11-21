@@ -8,4 +8,9 @@
 // -----------
 
 
+/**			**\
+ * 	TYPEDEFs	 *
+\**			**/
+typedef unsigned char byte; // 1 byte
+
 #endif //CORE_FTP_H

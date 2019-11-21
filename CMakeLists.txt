@@ -4,11 +4,14 @@ project(ftp C)
 set(CMAKE_C_STANDARD 11)
 
 # adding pre-compiled static library
+message(STATUS "Library ligeasylogs located in: ${CMAKE_SOURCE_DIR}/Libraries/libeasylogs.a")
 add_library(libeasylogs STATIC IMPORTED)
-set_property(TARGET libeasylogs PROPERTY IMPORTED_LOCATOIN ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/libeasylogs.a)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Headers)
+set_property(TARGET libeasylogs PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/Libraries/libeasylogs.a)
+include_directories(${CMAKE_SOURCE_DIR}/Headers)
 
-add_executable(ftp Sources/main.c)
+set(SOURCES Sources/main.c)
+message(STATUS "Creating sources from: ${SOURCES}")
+add_executable(ftp ${SOURCES})
 
 if (UNIX)
     set(LIBS libeasylogs)

@@ -6,6 +6,7 @@
 #define PREFIX_WARNING "[WARNING] "
 #define PREFIX_ERROR "[ERROR] "
 
+//useless to change - this is a static library
 #define LOG_NAME "output.log"
 
 void output_logs_str(const char prefix[], const char str[], ...)__attribute__((format(printf,2, 3)));

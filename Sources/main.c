@@ -48,21 +48,18 @@ void copy_file(char filename_src[80])
 
 int main(int ac, char **av)
 {
-    char *filename;
+    struct pollfd sockets[2];
 
     get_log_file();
     output_logs_str(PREFIX_INFO, "Welcome to FTP.\n");
-    if (ac <= 1) {
-	output_logs_str(PREFIX_WARNING, "Missing args.\n");
-	printf("Usage: /ftp [filename]\nNote that the filename IS mandatory.\n");
-	return 1;
-    }
-    printf("%s\n", av[0]+2);
-    filename = strdup(av[1]);
-
-    copy_file(filename);
-    // ---------
+    // ----	START	POINT	-----
+    int ftp_socket = create_socket("154.49.211.205", 21);
+    int data_socket;
+    
+    sockets[0].fd = ftp_socket;
+    printf("Return value=%d\n", send_command(sockets, 0, USER, "rudreais"));
+    // ----	END	POINT	-----
+    destroy_socket(ftp_socket);
     close_file();
-    free(filename);
     return 0;
 }

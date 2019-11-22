@@ -10,8 +10,12 @@ set_property(TARGET libeasylogs PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/L
 include_directories(${CMAKE_SOURCE_DIR}/Headers)
 
 set(SOURCES Sources/main.c)
-message(STATUS "Creating sources from: ${SOURCES}")
-add_executable(ftp ${SOURCES})
+set(RAWCOMMANDS Sources/RawCommands/input_handle.c Sources/RawCommands/user.c)
+set(FTP Sources/Sockets/connect.c Sources/Sockets/send_cmd.c)
+
+set(C_FILES ${SOURCES} ${RAWCOMMANDS} ${FTP})
+message(STATUS "Creating sources from: ${C_FILES}")
+add_executable(ftp ${C_FILES})
 
 if (UNIX)
     set(LIBS libeasylogs)

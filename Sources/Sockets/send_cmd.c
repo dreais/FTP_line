@@ -12,7 +12,7 @@
 
 int send_command(struct pollfd sockets[2], int index, char *CMD, char *args)
 {
-    char buffer[512];
+    char buffer[512] = {'\0'};
     short str_size = strlen(CMD) + strlen(args) + 1;
     char *command = malloc(sizeof(char) * (str_size + 1));
     int sent;
@@ -28,7 +28,5 @@ int send_command(struct pollfd sockets[2], int index, char *CMD, char *args)
     } else {
 	output_logs_str(PREFIX_DEBUG, "'%s' was proprely sent and %d characters were sent.\n", command, sent);
     }
-    recv(sockets[index].fd, buffer, 512, MSG_DONTWAIT);
-    printf("%s\n", buffer);
     return 0;
 }

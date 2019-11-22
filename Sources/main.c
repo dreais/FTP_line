@@ -46,9 +46,10 @@ void copy_file(char filename_src[80])
     fclose(dest);
 }
 
-int main(int ac, char **av)
+int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 {
     struct pollfd sockets[2];
+    int ret_values[2] = {-1};
 
     get_log_file();
     output_logs_str(PREFIX_INFO, "Welcome to FTP.\n");
@@ -56,8 +57,9 @@ int main(int ac, char **av)
     int ftp_socket = create_socket("154.49.211.205", 21);
     int data_socket;
     
+    (void) data_socket;
     sockets[0].fd = ftp_socket;
-    printf("Return value=%d\n", send_command(sockets, 0, USER, "rudreais"));
+    receive_connections(sockets, ret_values);
     // ----	END	POINT	-----
     destroy_socket(ftp_socket);
     close_file();
